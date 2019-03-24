@@ -6,15 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication11.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class ValuesController : BaseController
     {
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<ActionResult<IEnumerable<Product>>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(await Mediator.Send(new GetAllProductQuery()));
         }
 
         // GET api/values/5
